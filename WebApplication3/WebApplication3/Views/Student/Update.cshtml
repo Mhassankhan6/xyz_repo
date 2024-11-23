@@ -1,0 +1,43 @@
+﻿@model Student
+
+<h1>Update Student</h1>
+@{
+    var res = ViewBag.students as List<Student>;
+    if (TempData.ContainsKey("mess"))
+    {
+        <div class="alert alert-success mt-3 w-50">
+            @TempData["mess"]
+        </div>
+    }
+}
+<form method="post" asp-action="Update" asp-controller="Student">
+    <input type="hidden" asp-for="std_id" />
+    <input asp-for="std_name" class="form-control mt-3 w-50" placeholder="Name" />
+    <input asp-for="std_email" class="form-control mt-3 w-50" placeholder="Email" />
+    <input type="submit" class="btn btn-warning mt-3 mb-3 w-50 " />
+
+</form>
+
+@if (ViewBag.Student != null)
+{
+    <h1>Updated Table</h1>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            
+        </tr>
+    </thead>
+        <tbody>
+        <tr>
+            <td>@ViewBag.Student.std_id</td>
+            <td>@ViewBag.Student.std_name</td>
+            <td>@ViewBag.Student.std_email</td>
+        </tr>
+        
+        </tbody>
+</table>
+}

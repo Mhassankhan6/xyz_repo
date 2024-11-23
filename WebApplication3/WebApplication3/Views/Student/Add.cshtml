@@ -1,0 +1,52 @@
+﻿
+@model Student
+
+
+<h1>Add Student</h1>
+
+@{
+
+    var res = ViewBag.students as List<Student>;
+
+    if (TempData.ContainsKey("mess"))
+    {
+        <div class="alert alert-success mt-3 w-50" >
+            @TempData["mess"]
+        </div>
+    }
+}
+
+<form method="post" asp-action="Add" asp-controller="Student">
+       <input asp-for="std_name" class="form-control mt-3 w-50" placeholder="Name"/>
+
+    <input asp-for="std_email" class="form-control mt-3 w-50" placeholder="Email" />
+
+    <input type="submit" class="btn btn-outline-primary mt-3 w-50"/>
+</form>
+
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var items in res)
+            {
+                <tr>
+                    <td>@items.std_id</td>
+                    <td>@items.std_name</td>
+                    <td>@items.std_email</td>
+                    <td><a asp-action="Delete" asp-controller="Student" asp-route-data="@items.std_id">Delete</a></td>
+                    <td><a asp-action="Update" asp-controller="Student" asp-route-data="@items.std_id">Update</a></td>
+                    </tr>
+            }
+        }
+    </tbody>
+</table>
